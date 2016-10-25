@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scheduler", "Scheduler\Scheduler.csproj", "{EAAB5136-6DC3-4A4A-8596-FDA81BCC49CC}"
+	ProjectSection(ProjectDependencies) = postProject
+		{568A75F1-3C0E-462B-BF90-A9CF4D4FE797} = {568A75F1-3C0E-462B-BF90-A9CF4D4FE797}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TennisSlot", "TennisSlot\TennisSlot.csproj", "{568A75F1-3C0E-462B-BF90-A9CF4D4FE797}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alerter", "Alerter\Alerter.csproj", "{7E89D8C2-3329-42D2-ACAF-749E98CB6856}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EAAB5136-6DC3-4A4A-8596-FDA81BCC49CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EAAB5136-6DC3-4A4A-8596-FDA81BCC49CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EAAB5136-6DC3-4A4A-8596-FDA81BCC49CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EAAB5136-6DC3-4A4A-8596-FDA81BCC49CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{568A75F1-3C0E-462B-BF90-A9CF4D4FE797}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{568A75F1-3C0E-462B-BF90-A9CF4D4FE797}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{568A75F1-3C0E-462B-BF90-A9CF4D4FE797}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{568A75F1-3C0E-462B-BF90-A9CF4D4FE797}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E89D8C2-3329-42D2-ACAF-749E98CB6856}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E89D8C2-3329-42D2-ACAF-749E98CB6856}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E89D8C2-3329-42D2-ACAF-749E98CB6856}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E89D8C2-3329-42D2-ACAF-749E98CB6856}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
