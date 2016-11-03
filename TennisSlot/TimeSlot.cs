@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Mail;
 
 namespace TennisSlot
@@ -58,7 +59,9 @@ namespace TennisSlot
         public static List<TimeSlot> LoadFromExcel(string timeSlotsFileLocation)
         {
             var timeSlots = new List<TimeSlot>();
-            var fileInfo = new FileInfo(timeSlotsFileLocation);
+
+            var localFile = string.Empty;
+            var fileInfo = GetExcelFile(timeSlotsFileLocation, out localFile);
 
             using (var package = new ExcelPackage(fileInfo))
             {
@@ -96,7 +99,29 @@ namespace TennisSlot
                 }
             }
 
+            if (localFile != timeSlotsFileLocation)
+                File.Delete(localFile);
+
             return timeSlots;
+        }
+
+        public static FileInfo GetExcelFile(string timeSlotsFileLocation, out string localFile)
+        {
+            localFile = Guid.NewGuid().ToString("N") + ".xlsx";
+            if (timeSlotsFileLocation.StartsWith("http"))
+            {
+                using (WebClient client = new WebClient())
+                {
+                    client.Credentials = CredentialCache.DefaultNetworkCredentials;
+                    client.DownloadFile(timeSlotsFileLocation, localFile);
+                }
+            }
+            else
+            {
+                localFile = timeSlotsFileLocation;
+            }
+
+            return new FileInfo(localFile);
         }
     }
 
@@ -219,18 +244,19 @@ namespace TennisSlot
         public static void AlertPlayersForTomorrow(this List<TimeSlot> timeSlots, List<Player> playerList)
         {
             timeSlots.AlertPlayers(playerList, DateTime.Now.AddDays(1).Date, 
-                "Tenis liga - podsjetnik o sutrašnjem terminu", "Sutra u {0}h imate termin protiv igrača: {1}  <br /><br /> Pozdrav");
+                "Tenis liga - podsjetnik o sutrašnjem terminu", "Sutra u <u>{0}h</u> imate termin protiv igrača: <u>{1}</u>  <br /><br /> Pozdrav");
         }
 
         public static void AlertPlayersForToday(this List<TimeSlot> timeSlots, List<Player> playerList)
         {
             timeSlots.AlertPlayers(playerList, DateTime.Now.Date, 
-                "Tenis liga - podsjetnik o današnjem terminu", "Danas u {0}h imate termin protiv igrača: {1} <br /><br /> Pozdrav");
+                "Tenis liga - podsjetnik o današnjem terminu", "Danas u <u>{0}h</u> imate termin protiv igrača: <u>{1}</u> <br /><br /> Pozdrav");
         }
 
         private static void AlertPlayers(this List<TimeSlot> timeSlots, List<Player> playerList, 
             DateTime alertDate, string subject, string bodyMessage)
         {
+            bodyMessage = "<div style='font-family: Trebuchet MS; font-size: 14px;'>" + bodyMessage + "</div>";
             var alertTimeSlots = timeSlots.Where(x => x.PlayTime.Date == alertDate);
 
             Action<string, TimeSlot, Player> sendMail = (playerName, timeSlot, opponent) =>

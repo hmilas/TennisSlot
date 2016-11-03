@@ -1,7 +1,5 @@
 ﻿using OfficeOpenXml;
-using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
 using System.Linq;
 
@@ -48,7 +46,8 @@ namespace TennisSlot
         public static List<Player> LoadFromExcel(string timeSlotsFileLocation)
         {
             var playerList = new List<Player>();
-            var fileInfo = new FileInfo(timeSlotsFileLocation);
+            var localFile = string.Empty;
+            var fileInfo = TimeSlot.GetExcelFile(timeSlotsFileLocation, out localFile);
 
             using (var package = new ExcelPackage(fileInfo))
             {

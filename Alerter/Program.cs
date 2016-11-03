@@ -11,14 +11,14 @@ namespace Alerter
             var timeSlots = TimeSlot.LoadFromExcel(timeSlotsFileLocation);
             var playerList = Player.LoadFromExcel(timeSlotsFileLocation);
 
-            if(args[0] == "today")
+            if (args[0] == "today")
             {
                 timeSlots.AlertPlayersForToday(playerList);
             }
             else
             {
                 timeSlots.AlertPlayersForTomorrow(playerList);
-            }           
+            }
         }
     }
 }
